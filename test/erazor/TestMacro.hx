@@ -84,7 +84,7 @@ class TestMacro
 	}
 }
 
-@:template("Hello @name")
+@:template("Hello @name@{ var x = StringTools.endsWith(name, 'a'); }")
 class MacroTest0 extends erazor.macro.Template<{name:String}>
 {
 	

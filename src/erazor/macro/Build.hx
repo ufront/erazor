@@ -69,6 +69,8 @@ class Build
 					templatePath = path.join("/") + "/" + templatePath;
 
 					if (! FileSystem.exists(templatePath)) throw new Error("File " + templatePath + " not found.", meta.params[0].pos);
+					
+					Context.registerModuleDependency(Context.getLocalClass().get().module, templatePath);
 					var contents = File.getContent(templatePath);
 					var pos = Context.makePosition( { min:0, max:contents.length, file:templatePath } );
 
@@ -284,6 +286,8 @@ class Build
 				switch (c)
 				{
 					case CIdent(s):
+						var ch = s.charCodeAt(0);
+						isType = isType || (ch >= 'A'.code && ch <= 'Z'.code);
 						if (inCase)
 						{
 							addVar(s, declaredVars);
@@ -305,7 +309,10 @@ class Build
 				}
 			case EArray( e1, e2 ): { expr:EArray(_recurse(e1), _recurse(e2)), pos:pos(e.pos) };
 			case EBinop( op, e1, e2): { expr:EBinop(op, _recurse(e1), _recurse(e2)), pos:pos(e.pos) };
-			case EField( e1, field ): { expr:EField(changeExpr(e1, contextExpr, declaredVars, curPosInfo, false, isType), field), pos:pos(e.pos) };
+			case EField( e1, field ): 
+				var c = field.charCodeAt(0);
+				isType = isType || (c >= 'A'.code && c <= 'Z'.code);
+				{ expr:EField(changeExpr(e1, contextExpr, declaredVars, curPosInfo, false, isType), field), pos:pos(e.pos) };
 			case EType( e1, field ): { expr:EType(changeExpr(e1, contextExpr, declaredVars, curPosInfo, false, true), field), pos:pos(e.pos) };
 			case EParenthesis( e1 ):  { expr:EParenthesis(changeExpr(e1, contextExpr, declaredVars, curPosInfo, inCase, isType)), pos:pos(e.pos) };
 			case EObjectDecl( fields ): { expr:EObjectDecl(fields.map(function(f) return { field:f.field, expr:_recurse(f.expr) } ).array()), pos:pos(e.pos) };
