@@ -57,7 +57,8 @@ class Build
 					path.pop();
 
 					var templatePath = getString(meta.params[0]);
-					templatePath = path.join("/") + "/" + templatePath;
+					path.push(templatePath);
+					templatePath = path.join("/");
 
 					if (! FileSystem.exists(templatePath)) throw new Error("File " + templatePath + " not found.", meta.params[0].pos);
 
@@ -182,7 +183,7 @@ class Build
 		loop(Context.getLocalClass(), true);
 
 		// Call macro string -> macro parser
-		var expr = Context.parse(script, Context.makePosition( { min:0, max:script.length, file:file } ));
+		var expr = Context.parseInlineString(script, Context.makePosition( { min:0, max:script.length, file:file } ));
 		expr = new MacroBuildMap(blockPos, promotedField, declaredVars).map(expr);
 
 		#if erazor_macro_debug
@@ -193,7 +194,7 @@ class Build
 		w.writeString(str);
 		w.close();
 
-		expr = Context.parse(str, Context.makePosition( { min:0, max:str.length, file: file } ));
+		expr = Context.parseInlineString(str, Context.makePosition( { min:0, max:str.length, file: file } ));
 		#end
 
 		var executeBlock = [];
@@ -254,6 +255,7 @@ class MacroBuildMap
 		var len = pos.max - pos.min;
 
 		var min = pos.min - carry;
+		trace(pos,min,len);
 		var ret = Context.makePosition( { file: info.file, min:min, max:min + len } );
 
 		return ret;

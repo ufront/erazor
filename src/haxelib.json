@@ -8,6 +8,6 @@
   "releasenote": "Erazor macros update rewrite; Haxe 3.0 support",
   "contributors": ["fponticelli"],
   "dependencies": {
-    "hscript": "1.6"
+    "hscript": ""
   }
 }
