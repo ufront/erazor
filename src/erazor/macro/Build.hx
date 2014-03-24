@@ -255,7 +255,6 @@ class MacroBuildMap
 		var len = pos.max - pos.min;
 
 		var min = pos.min - carry;
-		trace(pos,min,len);
 		var ret = Context.makePosition( { file: info.file, min:min, max:min + len } );
 
 		return ret;
