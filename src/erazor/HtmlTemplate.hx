@@ -5,20 +5,20 @@ import erazor.Output;
 class HtmlTemplate extends Template
 {
 
-	public function new(template : String) 
+	public function new(template : String)
 	{
 		super(template);
-		super.addHelper("raw", raw);
+		addHelper("raw", raw);
 	}
-	
-	override public function escape(str : String) : String 
+
+	override public function escape(str : String) : String
 	{
 		return StringTools.htmlEscape(str, true);
 	}
-	
+
 	private static function raw(str : Dynamic)
 	{
 		return new SafeString(Std.string(str));
 	}
-	
+
 }

@@ -18,11 +18,11 @@ class TString {
 typedef SafeString = TString;
 
 class UnsafeString extends TString {
-	
+
 	public dynamic function escape( str ){
 		return StringTools.htmlEscape( str, true );
 	}
-	
+
 	public override function new( s , escapeMethod = null ){
 		super( s );
 		if( escapeMethod != null )
@@ -44,11 +44,11 @@ class Output extends StringBuf {
 		super();
 	}
 
-	public dynamic function escape( str ){
+	public dynamic function escape( str : String ) : String {
 		return str;
 	}
 
-	public inline function unsafeAdd( str : Dynamic ){
+	public function unsafeAdd( str : Dynamic ){
 		var val = if( Std.is( str , TString ) ){
 			str.toString();
 		}else{
@@ -57,11 +57,11 @@ class Output extends StringBuf {
 
 		add(val);
 	}
-	
+
 	public static function safe( str : String ) {
 		return new SafeString( str );
 	}
-	
+
 	public static function unsafe( str : String ) {
 		return new UnsafeString( str );
 	}

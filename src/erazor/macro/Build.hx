@@ -200,7 +200,7 @@ class Build
 
 		var executeBlock = [];
 
-		executeBlock.push(macro var __b__ = new Output(escape));
+		executeBlock.push(macro var __b__ = new erazor.Output(escape));
 		executeBlock.push(expr);
 		executeBlock.push(macro return __b__.toString());
 
