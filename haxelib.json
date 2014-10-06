@@ -4,7 +4,7 @@
   "classPath": "src",
   "tags": ["cross","template"],
   "description": "A haXe implementation of the MVC 3 Razor template engine",
-  "contributors": ["jason","fponticelli","waneck"],
+  "contributors": ["jason","fponticelli","waneck","ciscoheat"],
   "releasenote": "Haxe 3.0",
   "version": "1.0.0-rc.1",
   "url": "http://github.com/ufront/erazor",
