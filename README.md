@@ -15,6 +15,18 @@ var s = new Template("Hello, @name!").execute({name:"World"});
 // "Hello, World!"
 ```
 
+#### Function call
+```haxe
+var s = new Template("Hello, @getName()!").execute({getName:function() return "World"});
+// "Hello, World!"
+```
+
+#### Condition
+```haxe
+var s = new Template("@if(success){done!}else{fail!}").execute({success:true});
+// "done!"
+```
+
 #### For loop
 ```haxe
 var s = new Template("@for(name in names){Hello, @name! }").execute({names:["Peter","Clare","Sandra"]});
