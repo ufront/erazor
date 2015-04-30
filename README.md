@@ -9,7 +9,20 @@ More details coming soon.  Feel free to send a pull request adding some examples
 
 ### Basic Usage
 
-... can somebody send a pull request with some examples? Thanks!
+#### Simple variables
+```haxe
+var s = new Template("Hello, @name!").execute({name:"World"});
+// "Hello, World!"
+```
+
+#### For loop
+```haxe
+var s = new Template("@for(name in names){Hello, @name! }").execute({names:["Peter","Clare","Sandra"]});
+// "Hello, Peter! Hello, Clare! Hello, Sandra! "
+```
+
+... can somebody send a pull request with some more examples? Thanks!
+
 
 ### License
 
