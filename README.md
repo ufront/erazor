@@ -33,6 +33,14 @@ var s = new Template("@for(name in names){Hello, @name! }").execute({names:["Pet
 // "Hello, Peter! Hello, Clare! Hello, Sandra! "
 ```
 
+#### Code blocks
+
+Use `@{ }` to wrap some hscript codes. Don't forget the semicolon (;) at the end. With this you can declare some variables for later use.
+```haxe
+var s = new Template("@{var p = "Hello, World!";}@p").execute();
+// "Hello, World!"
+```
+
 ... can somebody send a pull request with some more examples? Thanks!
 
 
