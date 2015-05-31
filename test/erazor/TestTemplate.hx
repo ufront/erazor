@@ -1,4 +1,4 @@
-﻿package erazor;
+package erazor;
 
 import utest.Assert;
 import erazor.Output;
