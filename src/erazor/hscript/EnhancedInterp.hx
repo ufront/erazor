@@ -1,4 +1,4 @@
-package erazor.hscript;   
+package erazor.hscript;
 
 import hscript.Expr;
 import hscript.Interp;
@@ -17,13 +17,8 @@ class EnhancedInterp extends Interp
 	}
 	override function get( o : Dynamic, f : String ) : Dynamic {
 		if( o == null ) throw Error.EInvalidAccess(f);
-		
-		return 
-		#if getter_support
-		 Reflect.getProperty(o,f);
-		#else
-		 Reflect.field( o , f );
-		#end
+
+		return Reflect.getProperty(o,f);
 	}
 	override function call( o : Dynamic, f : Dynamic, args : Array<Dynamic> ) : Dynamic {
 #if php
@@ -50,10 +45,10 @@ class EnhancedInterp extends Interp
 #elseif js
 		args = args.concat([null, null, null, null, null]);
 		return Reflect.callMethod(o, f, args);
-#elseif neko 
+#elseif neko
 		var n : Int = untyped __dollar__nargs(f);
 		while(args.length < n)
-			args.push(null); 
+			args.push(null);
 		return Reflect.callMethod(o,f,args);
 #elseif flash9
 		while (true)
@@ -73,9 +68,9 @@ class EnhancedInterp extends Interp
 		}
 		return null;
 #else
-        return Reflect.callMethod(o,f,args);  
-#end     
-	}  
+        return Reflect.callMethod(o,f,args);
+#end
+	}
 #if php
 	override public function expr( e : Expr ) : Dynamic {
 		switch( e ) {
