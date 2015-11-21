@@ -9,7 +9,40 @@ More details coming soon.  Feel free to send a pull request adding some examples
 
 ### Basic Usage
 
-... can somebody send a pull request with some examples? Thanks!
+#### Simple variables
+```haxe
+var s = new Template("Hello, @name!").execute({name:"World"});
+// "Hello, World!"
+```
+
+#### Function call
+```haxe
+var s = new Template("Hello, @getName()!").execute({getName:function() return "World"});
+// "Hello, World!"
+```
+
+#### Condition
+```haxe
+var s = new Template("@if(success){done!}else{fail!}").execute({success:true});
+// "done!"
+```
+
+#### For loop
+```haxe
+var s = new Template("@for(name in names){Hello, @name! }").execute({names:["Peter","Clare","Sandra"]});
+// "Hello, Peter! Hello, Clare! Hello, Sandra! "
+```
+
+#### Code blocks
+
+Use `@{ }` to wrap some hscript codes. Don't forget the semicolon (;) at the end. With this you can declare some variables for later use.
+```haxe
+var s = new Template("@{var p = "Hello, World!";}@p").execute();
+// "Hello, World!"
+```
+
+... can somebody send a pull request with some more examples? Thanks!
+
 
 ### License
 
