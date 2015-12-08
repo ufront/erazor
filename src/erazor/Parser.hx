@@ -20,7 +20,7 @@ private enum ParseResult {
 
 class Parser
 {
-	private static var at = '@';
+	private static inline var at = '@';
 
 	private var condMatch : EReg;
 	private var inConditionalMatch : EReg;
