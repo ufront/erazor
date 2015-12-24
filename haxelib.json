@@ -5,8 +5,8 @@
   "tags": ["cross","template"],
   "description": "A haXe implementation of the MVC 3 Razor template engine",
   "contributors": ["jason","fponticelli","waneck","ciscoheat"],
-  "releasenote": "Support getter and setter properties by default",
-  "version": "1.0.0",
+  "releasenote": "Fix for Haxe 3.3+",
+  "version": "1.0.1",
   "url": "http://github.com/ufront/erazor",
   "dependencies": {
     "hscript": ""
