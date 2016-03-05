@@ -36,8 +36,7 @@ class UnsafeString extends TString {
 }
 
 
-
-class Output extends StringBuf {
+@:keep class Output extends StringBuf {
 
 	public function new( escapeMethod = null ){
 		if( escapeMethod != null ) escape = escapeMethod;
