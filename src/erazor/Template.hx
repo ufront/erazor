@@ -87,10 +87,11 @@ class Template
 		}
 		else
 		{
-			for(field in Reflect.fields(content))
-			{
-				interp.variables.set(field, Reflect.field(content, field));
-			}
+			if (content != null)
+				for(field in Reflect.fields(content))
+				{
+					interp.variables.set(field, Reflect.field(content, field));
+				}
 		}
 	}
 }
