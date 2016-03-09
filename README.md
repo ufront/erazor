@@ -1,6 +1,8 @@
 Erazor Templating Engine
 ========================
 
+[![Build Status](https://travis-ci.org/ufront/erazor.svg?branch=master)](https://travis-ci.org/ufront/erazor)
+
 More details coming soon.  Feel free to send a pull request adding some examples and instructions to this readme!
 
 ### Installation
