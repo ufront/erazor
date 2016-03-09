@@ -88,7 +88,7 @@ class TestMacro
 	public function test_Source_level_explicit_import():Void
 	{
 		var template = new MacroTest10();
-		Assert.equals(Std.string(haxe.Int64.make(0x1234, 0x5678)), template.execute());
+		Assert.equals(haxe.Json.stringify({foo: "bar"}), template.execute());
 	}
 
 	public function test_Identifiers()
@@ -203,7 +203,7 @@ class MacroTest9 extends erazor.macro.Template
 	public var str:String;
 }
 
-@:template("@Int64.make(0x1234,0x5678)")
+@:template('@haxe.Json.stringify({foo: "bar"})')
 class MacroTest10 extends erazor.macro.Template
 {
 
