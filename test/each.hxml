@@ -1,0 +1,6 @@
+extraParams.hxml
+-main TestAll
+-cp test
+-cp src
+-lib utest
+-lib hscript

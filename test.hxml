@@ -1,0 +1,7 @@
+--next test/flash.hxml
+--next test/js.hxml
+--next test/php.hxml
+--next test/neko.hxml
+--next test/cpp.hxml
+--next test/java.hxml
+--next test/cs.hxml

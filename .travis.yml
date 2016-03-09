@@ -1,0 +1,49 @@
+language: haxe
+
+haxe:
+  - development
+  - 3.2.1
+
+os:
+  - linux
+  - osx
+
+sudo: false
+addons:
+  apt:
+    packages:
+      # Python
+      - python3
+      # PHP
+      - php5-cli
+      # C#
+      - mono-devel
+      - mono-mcs
+
+install:
+  # os-specific config
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+      brew update;
+      brew install mono;
+      brew install python3;
+    fi
+  # Install haxelibs
+  - haxelib install hxcpp
+  - haxelib install hxjava
+  - haxelib install hxcs
+  - yes | haxelib install test/each.hxml
+  - haxelib list
+
+script:
+  - haxe test/macro.hxml
+  - haxe test/neko.hxml
+  - haxe test/js.hxml
+  - haxe test/java.hxml
+  - haxe test/cs.hxml
+  - haxe test/flash.hxml
+  # php is currently failing...
+  # - haxe test/php.hxml
+  # haxe dev need a new hxcpp release
+  - if [ "${TRAVIS_HAXE_VERSION}" != "development" ]; then
+      haxe test/cpp.hxml;
+    fi
