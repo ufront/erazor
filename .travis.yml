@@ -41,8 +41,11 @@ script:
   - haxe test/java.hxml
   - haxe test/cs.hxml
   - haxe test/flash.hxml
-  # php is currently failing...
-  # - haxe test/php.hxml
+  # php target of haxe 3.2.1 has issue with Reflect, fixed in https://github.com/HaxeFoundation/haxe/pull/4921 
+  # also, a weird bug forces us to use "-debug", see https://github.com/HaxeFoundation/haxe/issues/4924
+  - if [ "${TRAVIS_HAXE_VERSION}" != "3.2.1" ]; then
+      haxe test/php.hxml -debug;
+    fi
   # haxe dev need a new hxcpp release
   - if [ "${TRAVIS_HAXE_VERSION}" != "development" ]; then
       haxe test/cpp.hxml;
