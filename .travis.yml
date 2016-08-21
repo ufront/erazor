@@ -28,7 +28,15 @@ install:
       brew install python3;
     fi
   # Install haxelibs
-  - haxelib install hxcpp
+  - if [ "${TRAVIS_HAXE_VERSION}" = "development" ]; then
+      haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git;
+      pushd $(haxelib path hxcpp | head -1);
+        pushd tools/hxcpp; haxe compile.hxml; popd;
+        pushd project; neko build.n; popd;
+      popd;
+    else
+      haxelib install hxcpp;
+    fi
   - haxelib install hxjava
   - haxelib install hxcs
   - yes | haxelib install test/each.hxml
@@ -41,12 +49,9 @@ script:
   - haxe test/java.hxml
   - haxe test/cs.hxml
   - haxe test/flash.hxml
+  - haxe test/cpp.hxml;
   # php target of haxe 3.2.1 has issue with Reflect, fixed in https://github.com/HaxeFoundation/haxe/pull/4921 
   # also, a weird bug forces us to use "-debug", see https://github.com/HaxeFoundation/haxe/issues/4924
   - if [ "${TRAVIS_HAXE_VERSION}" != "3.2.1" ]; then
       haxe test/php.hxml -debug;
-    fi
-  # haxe dev need a new hxcpp release
-  - if [ "${TRAVIS_HAXE_VERSION}" != "development" ]; then
-      haxe test/cpp.hxml;
     fi
