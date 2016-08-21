@@ -15,11 +15,6 @@ class EnhancedInterp extends Interp
 		//require StringBuf's add field
 		var add = new StringBuf().add;
 	}
-	override function get( o : Dynamic, f : String ) : Dynamic {
-		if( o == null ) throw Error.EInvalidAccess(f);
-
-		return Reflect.getProperty(o,f);
-	}
 	override function call( o : Dynamic, f : Dynamic, args : Array<Dynamic> ) : Dynamic {
 #if php
 		while (true)
