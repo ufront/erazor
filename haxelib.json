@@ -4,9 +4,9 @@
   "classPath": "src",
   "tags": ["cross","template"],
   "description": "A haXe implementation of the MVC 3 Razor template engine",
-  "contributors": ["jason","fponticelli","waneck","ciscoheat"],
-  "releasenote": "Fix for Haxe 3.3+",
-  "version": "1.0.1",
+  "contributors": ["jason","fponticelli","waneck","ciscoheat","andyli"],
+  "releasenote": "Bug fix release",
+  "version": "1.0.2",
   "url": "http://github.com/ufront/erazor",
   "dependencies": {
     "hscript": ""
