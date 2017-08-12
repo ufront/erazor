@@ -18,7 +18,7 @@ class Template
 		
 	}
 	
-	public dynamic function escape(str : String) : String
+	public function escape(str : String) : String
 	{
 		return str;
 	}
