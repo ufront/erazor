@@ -358,7 +358,11 @@ class MacroBuildMap
 				return ret;
 			});
 			{ expr: ETry(map(e1), catches), pos: pos(e.pos) };
+		#if (haxe_ver >= 4)
+		case EFor( { expr: EBinop(OpIn, e1, _) }, _):
+		#else
 		case EFor( { expr: EIn(e1, _) }, _):
+		#end
 			pushStack();
 			addIdents(e1);
 			var ret = ExprTools.map(e, map);
