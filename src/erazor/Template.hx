@@ -18,11 +18,26 @@ class Template
 	public var variables(default, null) : Hash<Dynamic>;
 	
 	public var helpers : Hash<Dynamic>;
+
+	var parsedBlocks:Array<TBlock>;
+	var script:String;
+	var parser:hscript.Parser;
+	var program:hscript.Expr;
 	
 	public function new(template : String)
 	{
 		this.template = template;
 		this.helpers = new Hash<Dynamic>();
+		
+		// Parse the template into TBlocks for the HTemplateParser
+		parsedBlocks = new Parser().parse(template);
+		
+		// Make a hscript with the buffer as context.
+		script = new ScriptBuilder('__b__').build(parsedBlocks);
+		
+		// Make hscript parse and interpret the script.
+		parser = new hscript.Parser();
+		program = parser.parseString(script);
 	}
 	
 	public dynamic function escape(str : String) : String
@@ -38,16 +53,6 @@ class Template
 	public function execute(?content : PropertyObject) : String
 	{
 		var buffer = new Output(escape);
-		
-		// Parse the template into TBlocks for the HTemplateParser
-		var parsedBlocks = new Parser().parse(template);
-		
-		// Make a hscript with the buffer as context.
-		var script = new ScriptBuilder('__b__').build(parsedBlocks);
-		
-		// Make hscript parse and interpret the script.
-		var parser = new hscript.Parser();
-		var program = parser.parseString(script);
 		
 		var interp = new EnhancedInterp();
 		
